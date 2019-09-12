@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Radar } from 'react-chartjs-2';
 
 const radarData = {
-    labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
+    labels: ['Running', 'Swimming', 'Eating', 'Cycling', 'a', 'b', 'b', 'r'],
     datasets: [  
         {
             label: 'test1',
@@ -30,20 +30,23 @@ export default class Comp extends Component {
     constructor(props){
         super(props)
         this.state = {
-            radarData: {
+
                 labels: [],
-                datasets: [
+                dataSets: [
                     {
-                        data: [20, 10, 4, 2, 4, 76, 8, 4, 6],
+                        fill: true,
+                        backgroundColor: 'rgba(0, 255, 0, .5)',
                     },
                     {
-                        data: [24, 17, 34, 62, 74, 76, 98, 5, 7],
+                        fill: true,
+                        backgroundColor: 'rgba(255, 0, 0, .5)',
                     },
                     {
-                        data: [65, 3, 23, 43, 54, 45, 65, 75, 77],
+                        fill: true,
+                        backgroundColor: 'rgba(0, , 255, .5)',
                     },
-                ]
-            },
+                ],
+
             optionsData: {},
         }
     }
@@ -51,7 +54,7 @@ export default class Comp extends Component {
     componentDidMount(){
         axios.get('/api/radar').then(res => {
             console.log('res', res)
-            const newRadarData = JSON.parse(JSON.stringify(radarData))
+            // const newRadarData = JSON.parse(JSON.stringify(radarData))
             // {
             //     label: 'test3',
             //     fill: true,
@@ -60,30 +63,35 @@ export default class Comp extends Component {
             // },
             const stateKeys = Object.keys(res.data.answer.states)
             console.log('stateKeys', stateKeys)
-            const monthKeys = Object.keys(res.data.answer.states[stateKeys[0]])
-            console.log('monthKeys', monthKeys)
+            // const monthKeys = Object.keys(res.data.answer.states[stateKeys[0]])
+            // console.log('monthKeys', monthKeys)
             const stateData = {
-                labels: [],
-                datasets: [
-
-                ]
+                dataSets: [
+                    {
+                        fill: true,
+                        backgroundColor: 'rgba(0, 255, 0, .5)',
+                    },
+                    {
+                        fill: true,
+                        backgroundColor: 'rgba(255, 0, 0, .5)',
+                    },
+                    {
+                        fill: true,
+                        backgroundColor: 'rgba(0, , 255, .5)',
+                    },
+                ],
             }
-            console.log('stateLabels',  Object.keys(res.data.answer.states[stateKeys[0]][monthKeys[0]]))
-            stateData.labels = [...Object.keys(res.data.answer.states[stateKeys[0]][monthKeys[0]])]
-
-            const stateLabels = stateData.labels.map((condition, i) => {
-                stateData.datasets.push({
-                    data: [...Object.values(res.data.answer.states[stateKeys[0]][monthKeys[0]])],
-                    label: stateData.labels[i]
-
+            console.log(res.data.answer.states[stateKeys[0]].labels)
+            stateData.labels = res.data.answer.states[stateKeys[0]].labels
+            stateData.dataSets.forEach((dataSet, i) => {
+                dataSet.data = res.data.answer.states[stateKeys[0]].dataSets[i].data
+                dataSet.label = res.data.answer.states[stateKeys[0]].dataSets[i].label
             })
-            })
+
             console.log('stateData', stateData)
-            const firstState = {
-                labels: stateKeys
-            }
+
             this.setState({
-                answer: res.data.answer,
+                ...stateData
 
             })
         }).catch(err => {
@@ -96,10 +104,14 @@ export default class Comp extends Component {
 
 
     render(){
-        const { radarData, optionsData } = this.state
+        const { labels, dataSets, optionsData } = this.state
+        console.log('this.state', this.state)
+        const data = {labels, datasets: dataSets}
+        console.log('data', data)
+        console.log('radarData', radarData)
         return(
             <CompDiv> 
-                <Radar className='radar' data={radarData} options={optionsData} />
+                <Radar className='radar' data={data} options={optionsData} />
             </CompDiv>
         )
     }
