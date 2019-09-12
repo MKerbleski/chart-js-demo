@@ -1,7 +1,7 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
-import { Radar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 const radarData = {
     labels: ['Running', 'Swimming', 'Eating', 'Cycling', 'a', 'b', 'b', 'r'],
@@ -30,70 +30,38 @@ export default class Comp extends Component {
     constructor(props){
         super(props)
         this.state = {
-
-                labels: [],
-                dataSets: [
-                    {
-                        fill: true,
-                        backgroundColor: 'rgba(0, 255, 0, .5)',
-                    },
-                    {
-                        fill: true,
-                        backgroundColor: 'rgba(255, 0, 0, .5)',
-                    },
-                    {
-                        fill: true,
-                        backgroundColor: 'rgba(0, , 255, .5)',
-                    },
-                ],
-
-            optionsData: {},
+            stateKeys: [],
+            stateIndex: 0,
+            options: { title: {
+                display: true,
+                text: 'loading'
+            }},
+            labels: [],
+            dataSets: [
+                {
+                    fill: true,
+                    backgroundColor: 'rgba(0, 255, 0, .5)',
+                },
+                {
+                    fill: true,
+                    backgroundColor: 'rgba(255, 0, 0, .5)',
+                },
+                {
+                    fill: true,
+                    backgroundColor: 'rgba(0, , 255, .5)',
+                },
+            ],
         }
     }
 
     componentDidMount(){
         axios.get('/api/radar').then(res => {
-            console.log('res', res)
-            // const newRadarData = JSON.parse(JSON.stringify(radarData))
-            // {
-            //     label: 'test3',
-            //     fill: true,
-            //     backgroundColor: 'rgba(0, 0, 255, .5)',
-            //     data: [65, 3, 23, 43, 54, 45, 65, 75, 77],
-            // },
             const stateKeys = Object.keys(res.data.answer.states)
-            console.log('stateKeys', stateKeys)
-            // const monthKeys = Object.keys(res.data.answer.states[stateKeys[0]])
-            // console.log('monthKeys', monthKeys)
-            const stateData = {
-                dataSets: [
-                    {
-                        fill: true,
-                        backgroundColor: 'rgba(0, 255, 0, .5)',
-                    },
-                    {
-                        fill: true,
-                        backgroundColor: 'rgba(255, 0, 0, .5)',
-                    },
-                    {
-                        fill: true,
-                        backgroundColor: 'rgba(0, , 255, .5)',
-                    },
-                ],
-            }
-            console.log(res.data.answer.states[stateKeys[0]].labels)
-            stateData.labels = res.data.answer.states[stateKeys[0]].labels
-            stateData.dataSets.forEach((dataSet, i) => {
-                dataSet.data = res.data.answer.states[stateKeys[0]].dataSets[i].data
-                dataSet.label = res.data.answer.states[stateKeys[0]].dataSets[i].label
-            })
-
-            console.log('stateData', stateData)
-
             this.setState({
-                ...stateData
-
+                stateKeys, 
+                dataFromServer: res.data.answer.states,
             })
+            this.changeLocation(this.state.stateIndex)
         }).catch(err => {
             this.setState({
                 data: null
@@ -102,16 +70,76 @@ export default class Comp extends Component {
         })
     }
 
+    changeLocation = (stateIndex) => {
+        const { dataFromServer, stateKeys } = this.state
+
+        const   monthSettings = [
+                {
+                    fill: true,
+                    backgroundColor: 'rgba(0, 255, 0, .2)',
+                },
+                {
+                    fill: true,
+                    backgroundColor: 'rgba(255, 0, 0, .2)',
+                },
+                {
+                    fill: true,
+                    backgroundColor: 'rgba(0, 0, 255, .2)',
+                },
+            ]
+        
+        // console.log(dataFromServer[stateKeys[0]].labels)
+        const labels = dataFromServer[stateKeys[stateIndex]].labels
+        const options = {
+            title: {
+                display: false,
+                text: stateKeys[stateIndex]
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Category'
+                    }
+                  }],
+                  yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Purchases'
+                    }
+                  }]
+            },
+            yAxisId: 'Purchase',
+
+        }
+        const datasets = monthSettings.map((dataSet, i) => {
+           return { 
+                data: dataFromServer[stateKeys[stateIndex]].dataSets[i].data,
+                label: dataFromServer[stateKeys[stateIndex]].dataSets[i].label,
+                fill: true,
+                backgroundColor: monthSettings[i].backgroundColor
+            }
+
+        })
+
+        this.setState({
+            labels, datasets, options, stateIndex
+        })
+    }
 
     render(){
-        const { labels, dataSets, optionsData } = this.state
-        console.log('this.state', this.state)
-        const data = {labels, datasets: dataSets}
-        console.log('data', data)
-        console.log('radarData', radarData)
+        const { stateKeys, labels, datasets, options, stateIndex} = this.state
+        const data = {labels, datasets}
+
         return(
             <CompDiv> 
-                <Radar className='radar' data={data} options={optionsData} />
+                <h1>How states consume, by month.</h1>
+                <h2>state: {options.title.text}</h2>
+                {stateIndex>0 ? <button onClick={() => this.changeLocation( stateIndex-1)}>Prev State</button> : null}
+                {stateIndex<stateKeys.length-1?<button onClick={() => this.changeLocation(stateIndex+1)}>Next State</button>: null}
+                <Line className='radar' data={data} options={options} />
             </CompDiv>
         )
     }

@@ -109,14 +109,14 @@ router.get('/radar', (req, res, next) => {
 		} 
 
 		const conditionIndex = answer.states[purchase.state].labels.length
-		if(purchase.condition){
+		if(purchase.category){
 
-			if(!answer.states[purchase.state].labels.includes(purchase.condition)){
-				answer.states[purchase.state].labels.push(purchase.condition)
+			if(!answer.states[purchase.state].labels.includes(purchase.category)){
+				answer.states[purchase.state].labels.push(purchase.category)
 				answer.states[purchase.state].dataSets.forEach(dataset => dataset.data.push(1))
 			} else {
-				// the condition is already on the label but we still need to add the month data
-				const existingConditionIndex = answer.states[purchase.state].labels.indexOf(purchase.condition)
+				// the category is already on the label but we still need to add the month data
+				const existingConditionIndex = answer.states[purchase.state].labels.indexOf(purchase.category)
 
 				const monthMap = {
 					'0119': 0,
