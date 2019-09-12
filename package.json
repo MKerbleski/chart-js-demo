@@ -9,6 +9,7 @@
 		"express-http-proxy": "^1.5.1",
 		"express-static-gzip": "^1.1.3",
 		"jsonwebtoken": "^8.5.1",
+		"lodash": "^4.17.15",
 		"timestamp": "0.0.1"
 	},
 	"scripts": {
