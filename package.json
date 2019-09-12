@@ -2,6 +2,7 @@
 	"name": "react-redux-routing",
 	"version": "0.1.0",
 	"private": true,
+	"homepage" : "https://mkerbleski.github.io/BrightfieldChallenge/",
 	"dependencies": {
 		"axios": "^0.18.1",
 		"csv-parser": "^2.3.0",
