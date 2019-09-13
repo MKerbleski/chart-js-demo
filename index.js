@@ -3,7 +3,7 @@ const apiRouter = require('./server/apiRouter.js');
 const path = require('path');
 
 const server = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 server.use(express.json());
 
