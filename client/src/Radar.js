@@ -112,7 +112,7 @@ export default class Comp extends Component {
                   }]
             },
         }
-        
+
         const datasets = monthSettings.map((dataSet, i) => {
            return { 
                 data: dataFromServer[stateKeys[stateIndex]].dataSets[i].data,
@@ -147,6 +147,7 @@ const CompDiv = styled.div`
     border: 1px solid red;
     width: 100%;
     height: 100%;
+    color: black;
     .radar{
         width: 100%;
     }

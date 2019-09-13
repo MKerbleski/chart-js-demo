@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
 import Radar from './Radar'
 import axios from 'axios'
 
