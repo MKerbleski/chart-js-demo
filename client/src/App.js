@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
-import Radar from './Radar'
-import Bar from './Bar'
-import Doughnut from './Doughnut'
+import Radar from './components/Charts/Line'
+import Bar from './components/Charts/Bar'
+import Doughnut from './components/Charts/Doughnut'
 import axios from 'axios'
 import styled from 'styled-components'
 

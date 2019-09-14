@@ -3,30 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { Line } from 'react-chartjs-2';
 
-const radarData = {
-    labels: ['Running', 'Swimming', 'Eating', 'Cycling', 'a', 'b', 'b', 'r'],
-    datasets: [  
-        {
-            label: 'test1',
-            fill: true,
-            backgroundColor: 'rgba(255, 0, 0, .5)',
-            data: [20, 10, 4, 2, 4, 76, 8, 4, 6],
-        },
-        {
-            label: 'test2',
-            fill: true,
-            backgroundColor: 'rgba(0, 255, 0, .5)',
-            data: [24, 17, 34, 62, 74, 76, 98, 5, 7],
-        },
-        {
-            label: 'test3',
-            fill: true,
-            backgroundColor: 'rgba(0, 0, 255, .5)',
-            data: [65, 3, 23, 43, 54, 45, 65, 75, 77],
-        },
-    ]
-}
-export default class Comp extends Component {
+export default class LineGraph extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -132,18 +109,18 @@ export default class Comp extends Component {
         const data = {labels, datasets}
 
         return(
-            <CompDiv> 
+            <RadarDiv> 
                 <h1>Number of items availble per state, in each month, by category.</h1>
                 <h6>State: {options.title.text}</h6>
                 {stateIndex > 0 ? <button onClick={() => this.changeLocation( stateIndex-1)}>Prev State</button> : null}
                 {stateIndex < stateKeys.length-1 ? <button onClick={() => this.changeLocation(stateIndex+1)}>Next State</button>: null}
                 <Line className='radar' data={data} options={options} />
-            </CompDiv>
+            </RadarDiv>
         )
     }
 }
 
-const CompDiv = styled.div`
+const RadarDiv = styled.div`
     border: 1px solid red;
     width: 100%;
     height: 70%;

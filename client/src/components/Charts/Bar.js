@@ -2,7 +2,7 @@ import React , { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 import { Bar } from 'react-chartjs-2';
-import { getSomeRGBAColors } from './utils'
+import { getSomeRGBAColors } from '../../utils'
 
 export default class MyBar extends Component {
     constructor(props){
