@@ -2,6 +2,7 @@ import React , { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 import { Bar } from 'react-chartjs-2';
+import { getSomeRGBAColors } from './utils'
 
 export default class MyBar extends Component {
     constructor(props){
@@ -12,26 +13,19 @@ export default class MyBar extends Component {
     }
 
     componentDidMount(){
-console.log(this.props.data.frequency.condition)
+        console.log(this.props.data.frequency.condition)
 
         // const { stateKeys, datasets, options, stateIndex} = this.state
-        const labels = Object.keys(this.props.data.frequency.condition)
+        const labels = Object.keys(this.props.data.frequency.category)
         console.log('labels', labels)
         const values = labels.map(condition => {
-            return this.props.data.frequency.condition[condition].count
+            return this.props.data.frequency.category[condition].count
         })
         const transparency = 0.8
         const data = {labels, datasets: [{
             label: '# of items',
             data: values,
-            backgroundColor: [
-                `rgb(255,224,230, ${transparency})`,
-                `rgb(255,236,217, ${transparency})`,
-                `rgb(255, 245, 221, ${transparency})`,
-                `rgb(219,242, 242, ${transparency})`,
-                `rgb(215,236,251, ${transparency})`,
-                `rgb(235,224,255, ${transparency})`,
-            ]
+            backgroundColor: getSomeRGBAColors(40)
         }]}
         const options = {
             title: {
