@@ -32,8 +32,7 @@ export default class App extends React.Component{
         <AppDiv>
           {this.state.data
             ? <div className="data">
-                <h3>Total number of items </h3>
-                <p>{this.state.data.results.length}</p>
+                <h3>Dashboard</h3>
                 <div className="top">
                   <Doughnut data={this.state.data} />
                   <Bar data={this.state.data} />
@@ -47,7 +46,7 @@ export default class App extends React.Component{
 }
 
 const AppDiv = styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
     box-sizing: border-box;
     max-width: 100vw;
     color: black;

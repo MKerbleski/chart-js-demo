@@ -31,23 +31,28 @@ export default class DoughnutChart extends Component {
         const sortedValues = sortedData.map(state => state.count)
         // console.log('values', values)
         const transparency = 0.8
-        const data = {labels: sortedLabels, datasets: [{
-            label: '# of items',
-            data: sortedValues,
-            backgroundColor: getSomeRGBAColors(sortedValues.length, 80)
-        }]}
+        const data = {
+            labels: sortedLabels, 
+            datasets: [{
+                label: '# of items',
+                data: sortedValues,
+                backgroundColor: getSomeRGBAColors(sortedValues.length, 80)
+            }]
+        }
         const options = {
             title: {
                 display: false,
                 text: 'Items availble per state',
             },
+            legend: {
+                display: false
+            }
         }
         this.setState({ data, options })
     }
 
     render(){
         const { data, options } = this.state
-        console.log(this.state)
         return(
             <CompDiv>
                 <h6>Items availble per state</h6>

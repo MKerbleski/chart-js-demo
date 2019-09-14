@@ -131,6 +131,7 @@ const RadarDiv = styled.div`
     color: black;
     display: flex;
     flex-direction: column;
+    padding: 10px;
     .radar{
         width: 100%;
     }
