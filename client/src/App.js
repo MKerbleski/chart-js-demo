@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import Radar from './Radar'
+import Bar from './Bar'
 import axios from 'axios'
 
 class App extends React.Component{
@@ -26,12 +27,17 @@ class App extends React.Component{
 
   render(){
 
-
       return (
         <div className="App">
-        <header className="App-header">
-          <Radar/>
-        </header>
+        {this.state.data
+          ? <>
+              <h3>Total number of items </h3>
+              <p>{this.state.data.results.length}</p>
+              <Bar data={this.state.data} />
+              <Radar/>
+            </>
+          :   <p>crunching numbers</p>}
+          
       </div>
     );
   }

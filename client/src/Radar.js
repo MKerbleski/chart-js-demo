@@ -107,7 +107,7 @@ export default class Comp extends Component {
                     display: true,
                     scaleLabel: {
                       display: true,
-                      labelString: 'Purchases'
+                      labelString: 'Items Availible'
                     }
                   }]
             },
@@ -133,10 +133,10 @@ export default class Comp extends Component {
 
         return(
             <CompDiv> 
-                <h1>How states consume, by month.</h1>
-                <h2>state: {options.title.text}</h2>
-                {stateIndex>0 ? <button onClick={() => this.changeLocation( stateIndex-1)}>Prev State</button> : null}
-                {stateIndex<stateKeys.length-1?<button onClick={() => this.changeLocation(stateIndex+1)}>Next State</button>: null}
+                <h1>Number of items availble per state, in each month, by category.</h1>
+                <h6>State: {options.title.text}</h6>
+                {stateIndex > 0 ? <button onClick={() => this.changeLocation( stateIndex-1)}>Prev State</button> : null}
+                {stateIndex < stateKeys.length-1 ? <button onClick={() => this.changeLocation(stateIndex+1)}>Next State</button>: null}
                 <Line className='radar' data={data} options={options} />
             </CompDiv>
         )
