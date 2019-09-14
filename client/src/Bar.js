@@ -58,9 +58,7 @@ console.log(this.props.data.frequency.condition)
         this.setState({ data, options })
     }
 
-    getRandomColor(){
-        return Math.floor(Math.random() * Math.floor(255))
-    }
+
 
     render(){
         const { data, options } = this.state

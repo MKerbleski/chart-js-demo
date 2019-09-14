@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import Radar from './Radar'
 import Bar from './Bar'
+import Doughnut from './Doughnut'
 import axios from 'axios'
 
 class App extends React.Component{
@@ -33,6 +34,7 @@ class App extends React.Component{
           ? <>
               <h3>Total number of items </h3>
               <p>{this.state.data.results.length}</p>
+              <Doughnut data={this.state.data} />
               <Bar data={this.state.data} />
               <Radar/>
             </>
