@@ -1,10 +1,10 @@
 import React , { Component } from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
+
 import { Doughnut } from 'react-chartjs-2';
 import { getSomeRGBAColors } from '../../utils'
 
-export default class MyBar extends Component {
+export default class DoughnutChart extends Component {
     constructor(props){
         super(props)
         this.state = {

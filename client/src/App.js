@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
-import Radar from './components/Charts/Line'
-import Bar from './components/Charts/Bar'
-import Doughnut from './components/Charts/Doughnut'
 import axios from 'axios'
 import styled from 'styled-components'
+
+import Bar from './components/Charts/Bar.js'
+import Line from './components/Charts/Line.js'
+import Doughnut from './components/Charts/Doughnut.js'
 
 export default class App extends React.Component{
   constructor(){
@@ -38,7 +38,7 @@ export default class App extends React.Component{
                   <Doughnut data={this.state.data} />
                   <Bar data={this.state.data} />
                 </div>
-                <Radar/>
+                <Line />
               </div>
             : <p>crunching numbers</p>}
         </AppDiv>
