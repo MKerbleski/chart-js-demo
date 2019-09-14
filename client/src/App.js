@@ -4,12 +4,12 @@ import Radar from './Radar'
 import Bar from './Bar'
 import Doughnut from './Doughnut'
 import axios from 'axios'
+import styled from 'styled-components'
 
-class App extends React.Component{
+export default class App extends React.Component{
   constructor(){
     super()
     this.state = {}
-     
   }
 
   componentDidMount(){
@@ -29,20 +29,38 @@ class App extends React.Component{
   render(){
 
       return (
-        <div className="App">
-        {this.state.data
-          ? <>
-              <h3>Total number of items </h3>
-              <p>{this.state.data.results.length}</p>
-              <Doughnut data={this.state.data} />
-              <Bar data={this.state.data} />
-              <Radar/>
-            </>
-          :   <p>crunching numbers</p>}
-          
-      </div>
+        <AppDiv>
+          {this.state.data
+            ? <div className="data">
+                <h3>Total number of items </h3>
+                <p>{this.state.data.results.length}</p>
+                <div className="top">
+                  <Doughnut data={this.state.data} />
+                  <Bar data={this.state.data} />
+                </div>
+                <Radar/>
+              </div>
+            : <p>crunching numbers</p>}
+        </AppDiv>
     );
   }
 }
 
-export default App;
+const AppDiv = styled.div`
+    border: 1px solid red;
+    box-sizing: border-box;
+    max-width: 100vw;
+    color: black;
+    .data{
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      .top{
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+      }
+    }
+`

@@ -68,8 +68,9 @@ export default class MyBar extends Component {
 
 const CompDiv = styled.div`
     border: 1px solid red;
+    box-sizing: border-box;
     width: 50%;
-    height: 50vh;
+    padding: 10px;
     .bar{
         width: 100%;
     }
