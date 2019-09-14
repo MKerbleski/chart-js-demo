@@ -58,8 +58,9 @@ export default class DoughnutChart extends Component {
 }
 
 const CompDiv = styled.div`
-    border: 1px solid red;
+    border: 1px solid black;
+    margin: 5px;
     box-sizing: border-box;
     padding: 10px;
-    width: 50%;
+    width: 49%;
 `

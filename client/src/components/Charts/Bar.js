@@ -60,18 +60,19 @@ export default class MyBar extends Component {
         return(
             <CompDiv>
                 <h6>Items availble per condition</h6>
-                <Bar className='bar' data={data} options={options} />
+                <Bar data={data} options={options} />
             </CompDiv>
         )
     }
 }
 
 const CompDiv = styled.div`
-    border: 1px solid red;
+    border: 1px solid black;
     box-sizing: border-box;
-    width: 50%;
+    margin: 5px;
+    width: 49%;
     padding: 10px;
     .bar{
-        width: 100%;
+        /* width: 100%; */
     }
 `

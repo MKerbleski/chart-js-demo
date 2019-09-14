@@ -38,7 +38,7 @@ export default class App extends React.Component{
                   <Doughnut data={this.state.data} />
                   <Bar data={this.state.data} />
                 </div>
-                <Line />
+                <Line  />
               </div>
             : <p>crunching numbers</p>}
         </AppDiv>
@@ -51,13 +51,20 @@ const AppDiv = styled.div`
     box-sizing: border-box;
     max-width: 100vw;
     color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .data{
+      /* border: 1px solid blue; */
       display: flex;
-      width: 100%;
+      width: 95%;
       flex-direction: column;
       align-items: center;
+      box-sizing: border-box;
       .top{
-        max-width: 100%;
+        /* border: 1px solid green; */
+        /* max-width: 100%; */
+        box-sizing: border-box;
         width: 100%;
         display: flex;
         flex-direction: row;

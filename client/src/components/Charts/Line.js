@@ -111,9 +111,11 @@ export default class LineGraph extends Component {
         return(
             <RadarDiv> 
                 <h1>Number of items availble per state, in each month, by category.</h1>
-                <h6>State: {options.title.text}</h6>
-                {stateIndex > 0 ? <button onClick={() => this.changeLocation( stateIndex-1)}>Prev State</button> : null}
-                {stateIndex < stateKeys.length-1 ? <button onClick={() => this.changeLocation(stateIndex+1)}>Next State</button>: null}
+                <div className="controls">
+                    {stateIndex > 0 ? <button className='buttonSpacing' onClick={() => this.changeLocation(stateIndex-1)}>Prev State</button> : <div className='buttonSpacing' ></div>}
+                    <h2 className="buttonSpacing">State: {options.title.text}</h2>
+                    {stateIndex < stateKeys.length-1 ? <button className='buttonSpacing' onClick={() => this.changeLocation(stateIndex+1)}>Next State</button>: <div className='buttonSpacing' ></div>}
+                </div>
                 <Line className='radar' data={data} options={options} />
             </RadarDiv>
         )
@@ -121,11 +123,29 @@ export default class LineGraph extends Component {
 }
 
 const RadarDiv = styled.div`
-    border: 1px solid red;
-    width: 100%;
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 99%;
+    margin: 5px;
     height: 70%;
     color: black;
+    display: flex;
+    flex-direction: column;
     .radar{
         width: 100%;
+    }
+    .controls {
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        width: 100%;
+        button{
+            height: 50%;
+            margin: 5px;
+        }
+        .buttonSpacing {
+            width: 20%;
+            text-align: center;
+        }
     }
 `
