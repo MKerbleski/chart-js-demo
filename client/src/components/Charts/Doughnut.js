@@ -13,20 +13,20 @@ export default class DoughnutChart extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.data.frequency.condition)
+        // console.log(this.props.data.frequency.condition)
         // const { stateKeys, datasets, options, stateIndex} = this.state
         const labels = Object.keys(this.props.data.frequency.state)
-        console.log('labels', labels)
+        // console.log('labels', labels)
         const values = labels.map(condition => {
             return {
                 stateName: condition,
                 count: this.props.data.frequency.state[condition].count}
         })
-        console.log('values', values)
+        // console.log('values', values)
         // console.log('values', values.sort((a,b) => (a.count < b.count) ? 1 : -1))
         // console.log('values', values)
         const sortedData = values.sort((a,b) => (a.count > b.count) ? -1 : 1)
-        console.log('sortedData', sortedData)
+        // console.log('sortedData', sortedData)
         const sortedLabels = sortedData.map(state => state.stateName)
         const sortedValues = sortedData.map(state => state.count)
         // console.log('values', values)

@@ -1,6 +1,5 @@
 ##Brightfield Coding Challenge s
 
-
 to run locally 
 
 navigate to root folder 
@@ -9,7 +8,7 @@ navigate to root folder
     -> npm i 
 
 terminal #1 
- npm run dev -- starts node server 
+ npm run dev -- starts node server with nodemon 
 
  terminal #2 
  npm run client -- starts local react server 

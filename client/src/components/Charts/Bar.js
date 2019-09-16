@@ -13,11 +13,11 @@ export default class MyBar extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.data.frequency.condition)
+        // console.log(this.props.data.frequency.condition)
 
         // const { stateKeys, datasets, options, stateIndex} = this.state
         const labels = Object.keys(this.props.data.frequency.category)
-        console.log('labels', labels)
+        // console.log('labels', labels)
         const values = labels.map(condition => {
             return this.props.data.frequency.category[condition].count
         })
@@ -56,7 +56,7 @@ export default class MyBar extends Component {
 
     render(){
         const { data, options } = this.state
-        console.log(this.state)
+        // console.log(this.state)
         return(
             <CompDiv>
                 <h6>Items availble per condition</h6>
