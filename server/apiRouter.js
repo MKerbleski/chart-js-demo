@@ -45,6 +45,7 @@ router.get('/csv', (req, res, next) => {
 		condition: {},
 		month: {},
 	}
+	
 	const keys = Object.keys(unique)
 	
 	results.forEach((purchase, i)=> {

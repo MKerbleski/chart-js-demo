@@ -49,24 +49,24 @@ export default class LineGraph extends Component {
 
     changeLocation = (stateIndex) => {
         const { dataFromServer, stateKeys } = this.state
-
-        const   monthSettings = [
+        const opacity = .2
+        const monthSettings = [
                 {
                     fill: true,
-                    backgroundColor: 'rgba(0, 255, 0, .2)',
+                    backgroundColor: `rgba(0, 255, 0, ${opacity})`,
                 },
                 {
                     fill: true,
-                    backgroundColor: 'rgba(255, 0, 0, .2)',
+                    backgroundColor: `rgba(255, 0, 0, ${opacity})`,
                 },
                 {
                     fill: true,
-                    backgroundColor: 'rgba(0, 0, 255, .2)',
+                    backgroundColor: `rgba(0, 0, 255, ${opacity})`,
                 },
             ]
-        
-        // console.log(dataFromServer[stateKeys[0]].labels)
+
         const labels = dataFromServer[stateKeys[stateIndex]].labels
+
         const options = {
             title: {
                 display: false,
@@ -76,22 +76,22 @@ export default class LineGraph extends Component {
                 xAxes: [{
                     display: true,
                     scaleLabel: {
-                      display: true,
-                      labelString: 'Category'
+                        display: true,
+                        labelString: 'Category'
                     }
-                  }],
-                  yAxes: [{
+                }],
+                yAxes: [{
                     display: true,
                     scaleLabel: {
-                      display: true,
-                      labelString: 'Items Availible'
+                        display: true,
+                        labelString: 'Items Availible'
                     }
-                  }]
+                }]
             },
         }
 
         const datasets = monthSettings.map((dataSet, i) => {
-           return { 
+            return { 
                 data: dataFromServer[stateKeys[stateIndex]].dataSets[i].data,
                 label: dataFromServer[stateKeys[stateIndex]].dataSets[i].label,
                 fill: true,
@@ -112,9 +112,13 @@ export default class LineGraph extends Component {
             <RadarDiv> 
                 <h1>Number of items availble per state, in each month, by category.</h1>
                 <div className="controls">
-                    {stateIndex > 0 ? <button className='buttonSpacing' onClick={() => this.changeLocation(stateIndex-1)}>Prev State</button> : <div className='buttonSpacing' ></div>}
+                    {stateIndex > 0 
+                        ? <button className='buttonSpacing' onClick={() => this.changeLocation(stateIndex-1)}>Prev State</button> 
+                        : <div className='buttonSpacing' ></div>}
                     <h2 className="buttonSpacing">State: {options.title.text}</h2>
-                    {stateIndex < stateKeys.length-1 ? <button className='buttonSpacing' onClick={() => this.changeLocation(stateIndex+1)}>Next State</button>: <div className='buttonSpacing' ></div>}
+                    {stateIndex < stateKeys.length-1 
+                        ? <button className='buttonSpacing' onClick={() => this.changeLocation(stateIndex+1)}>Next State</button>
+                        : <div className='buttonSpacing' ></div>}
                 </div>
                 <Line className='radar' data={data} options={options} />
             </RadarDiv>
