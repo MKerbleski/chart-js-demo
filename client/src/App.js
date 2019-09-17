@@ -7,24 +7,23 @@ import Line from './components/Charts/Line.js'
 import Doughnut from './components/Charts/Doughnut.js'
 
 export default class App extends React.Component{
-  constructor(){
-    super()
-    this.state = {}
-  }
+	constructor(){
+		super()
+		this.state = {}
+	}
 
-  componentDidMount(){
-    axios.get('/api/csv').then(res => {
-      this.setState({
-        data : res.data
-      })
-      console.log('res', res)
-    }).catch(err => {
-      this.setState({
-        data: null
-      })
-      console.log('err', err)
-    })
-  }
+	componentDidMount(){
+		axios.get('/api/csv').then(res => {
+			this.setState({
+				data : res.data
+			})
+		}).catch(err => {
+			this.setState({
+				data: null
+			})
+			console.log('err', err)
+		})
+	}
 
   render(){
 
