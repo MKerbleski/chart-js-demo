@@ -17,6 +17,7 @@ export default class App extends React.Component{
 			this.setState({
 				data : res.data
 			})
+			console.log('res', res)
 		}).catch(err => {
 			this.setState({
 				data: null

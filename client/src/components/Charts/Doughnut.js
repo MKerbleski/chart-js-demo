@@ -51,15 +51,15 @@ export default class DoughnutChart extends Component {
     render(){
         const { data, options } = this.state
         return(
-            <CompDiv>
+            <DoughnutDiv>
                 <h6>Items availble per state</h6>
                 <Doughnut data={data} options={options} />
-            </CompDiv>
+            </DoughnutDiv>
         )
     }
 }
 
-const CompDiv = styled.div`
+const DoughnutDiv = styled.div`
     border: 1px solid black;
     box-sizing: border-box;
     margin: 5px;

@@ -32,13 +32,14 @@ export default class LineGraph extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api/radar').then(res => {
-            const stateKeys = Object.keys(res.data.answer.states)
+        axios.get('/api/line').then(res => {
+            const stateKeys = Object.keys(res.data)
+            console.log('line', res)
             this.setState({
-                stateKeys, 
-                dataFromServer: res.data.answer.states,
-            })
-            this.changeLocation(this.state.stateIndex)
+                stateKeys,
+                dataFromServer: res.data,
+            }, () => this.changeLocation(this.state.stateIndex))
+            
         }).catch(err => {
             this.setState({
                 data: null
